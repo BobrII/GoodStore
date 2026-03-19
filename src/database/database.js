@@ -123,15 +123,16 @@ export const createTableCart = () => {
         name TEXT,
         price REAL,
         count INTEGER,
-        imageUrl TEXT
+        imageUrl TEXT,
+        createdAt TEXT
         );`
     );
 };
 
-export const addToCart = (name, price, count, imageUrl) => {
+export const addToCart = (name, price, count, imageUrl, createdAt) => {
     db.runSync(
-        `INSERT INTO cart (name, price, count, imageUrl) VALUES (?, ?, ?, ?)`,
-        [name, price, count, imageUrl]
+        `INSERT INTO cart (name, price, count, imageUrl, createdAt) VALUES (?, ?, ?, ?, ?)`,
+        [name, price, count, imageUrl, createdAt]
     );
 };
 

@@ -11,6 +11,8 @@ export default function RegistrationScreen({navigation}){
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
 
+    const isValide = email && password && password2;
+
     const setNewUser = () => {
         if(checkEmail(email)){
             alert('This account is already registered');
@@ -66,12 +68,15 @@ export default function RegistrationScreen({navigation}){
             </View>
 
             <View>
-                <TouchableOpacity onPress={() => setNewUser()}>
+                <TouchableOpacity
+                    disabled={!isValide}
+                    onPress={() => setNewUser()}>
                     <LinearGradient 
-                    style={stylesRegistration.button}
-                    colors={["#3033de", "#e73fd0"]}
-                    start={{x:0,y:0}}
-                    end={{x:1,y:0}}>
+                        style={[stylesRegistration.button, {opacity: isValide ? 1 : 0.5}]}
+                        colors={["#3033de", "#e73fd0"]}
+                        start={{x:0,y:0}}
+                        end={{x:1,y:0}}
+                    >
                         <Text style={stylesRegistration.buttonText}>Register</Text>
                     </LinearGradient>
                 </TouchableOpacity>
@@ -93,7 +98,7 @@ const stylesRegistration = StyleSheet.create({
     },
     mainText: {
         fontSize: 50,
-        color: '#1922c6',
+        color: COLORS.textColor,
         fontFamily: 'sans-serif',
         fontWeight: '800'
     },
@@ -102,11 +107,12 @@ const stylesRegistration = StyleSheet.create({
         marginHorizontal: 50,
         padding: 10,
         borderRadius: 30,
+        borderColor:COLORS.borderColorGrey,
         borderWidth: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.inputTextColor,
         fontSize: 20,
         marginBottom: 40,
-        color: '#000',
+        color: COLORS.textColor,
   },
     button: {
         height: 60,
@@ -119,6 +125,7 @@ const stylesRegistration = StyleSheet.create({
     buttonText: {
         fontSize: 30,
         fontFamily: 'sans-serif',
-        fontWeight: '700'
+        fontWeight: '700',
+        color:COLORS.textColor
     },
 })

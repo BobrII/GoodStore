@@ -25,8 +25,6 @@ export default function HomeScreen({navigation}){
         ...categories
     ]
 
-    console.log(allCategories);
-
     const loadCategories = () => {
         const data = getCategories();
         const activeCategories = data.filter(cat => cat.isActive === 1);

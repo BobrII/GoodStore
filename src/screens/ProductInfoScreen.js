@@ -30,6 +30,8 @@ export default function ProductInfo({route}){
         setInfo(item);
     }, []);
 
+    const date = new Date().toISOString();
+
     return(
         <>
         <View style={stylesProductInfo.topBorder}></View>
@@ -75,9 +77,17 @@ export default function ProductInfo({route}){
                 </Text>
                 <TouchableOpacity 
                     style={stylesProductInfo.buyButton} 
-                    onPress={() => addToCart(info.name, countedPrice, count, info.imageUrl)}
+                    onPress={() => 
+                        {addToCart(info.name, countedPrice, count, info.imageUrl, date);
+                        Toast.show({
+                            type: 'success',
+                            text1: 'Done',
+                            text2: 'Product created'
+                        })  
+                    }}
                 >
                     <Text style={{fontSize: 20, color: COLORS.textColor}}>Add to Cart</Text>
+                   
                 </TouchableOpacity>
             </View>
 

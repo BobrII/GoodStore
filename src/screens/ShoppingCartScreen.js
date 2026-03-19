@@ -29,6 +29,19 @@
 
     const ifHaveProducts = productInfo.length > 0;
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+
+        const diff = Math.floor((now - date) / 1000);
+
+        if (diff < 60) return 'just now';
+        if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+        if (diff < 86400) return `${Math.floor(diff / 3600)} h ago`;
+
+        return date.toLocaleDateString();
+    };
+
     return(
         <>
             <View style={stylesShoppingCartScreen.topBorder}>
@@ -58,6 +71,7 @@
                                 <Text style={stylesShoppingCartScreen.text}>{item.name}</Text>
                                 <Text style={stylesShoppingCartScreen.text}>Price: {item.price}$</Text>
                                 <Text style={stylesShoppingCartScreen.text}>Count: {item.count}</Text>
+                               
                             </View>
                             <View style={{ flex:1, alignItems:'center', justifyContent:'center'}}>
                                 <TouchableOpacity
@@ -68,6 +82,7 @@
                                         Delete
                                     </Text>
                                 </TouchableOpacity>
+                                <Text style={stylesShoppingCartScreen.text}>Added: {formatDate(item.createdAt)}</Text>
                             </View>
                         </View>
                     )}
@@ -110,7 +125,7 @@
                     Toast.show({
                         type: 'success',
                         text1: 'Done',
-                        text2: 'Product successfully removed'
+                        text2: 'Product successfully removed',
                     });
                 setModalVisible(false);
                 }}
