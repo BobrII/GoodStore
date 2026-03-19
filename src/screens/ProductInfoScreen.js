@@ -82,7 +82,7 @@ export default function ProductInfo({route}){
                         Toast.show({
                             type: 'success',
                             text1: 'Done',
-                            text2: 'Product created'
+                            text2: 'Product added to cart'
                         })  
                     }}
                 >
